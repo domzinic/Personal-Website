@@ -1,0 +1,44 @@
+---
+import '@fontsource-variable/geist';
+import '@fontsource-variable/geist-mono';
+import '@fontsource/instrument-serif';
+import '../styles/global.css';
+import Footer from '../components/Footer.astro';
+import { ClientRouter } from 'astro:transitions';
+
+interface Props {
+	title?: string;
+	description?: string;
+	ogType?: string;
+	ogTitle?: string;
+}
+
+const {
+	title = 'Personal Website',
+	description = 'My personal website',
+	ogType,
+	ogTitle
+} = Astro.props;
+
+const fullTitle = `${title} | Dominic Petrut`;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{fullTitle}</title>
+		<meta name="description" content={description} />
+
+		{ogType && <meta property="og:type" content={ogType} />}
+		{ogTitle && <meta property="og:title" content={ogTitle} />}
+		<ClientRouter />
+	</head>
+	<body class="mx-auto flex min-h-screen flex-col px-8 py-8 md:max-w-[600px] md:py-16">
+		<main class="relative flex-1 font-sans">
+			<slot />
+		</main>
+		<Footer />
+	</body>
+</html>

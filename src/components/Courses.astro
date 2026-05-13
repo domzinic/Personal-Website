@@ -1,0 +1,181 @@
+---
+interface Course {
+  code: string;
+  name: string;
+  grade: string;
+  description: string;
+}
+
+const courses: Course[] = [
+  {
+    code: "MAT 2143",
+    name: "Introduction to Group Theory",
+    grade: "A+, 100%",
+    description: "Defenition and Propreties of Groups. Arithmetic Modulo n, permutationsm cyclic groups. Cosets and Lagrange's theormem. Normal subgroups, homomorphisms, quotien groups, isomorphism theorems."
+  },
+  {
+    code: "MAT 2125",
+    name: "Elementary Real Analysis",
+    grade: "A+, 94%",
+    description: "Propreties of the real numbers. Supremum and infimum, lim sup and lim inf. Sequences and convergence. The topology of Rn. Compactness, Heine-Borel. Continuity and Uniform Continuity. Derivatives, the Riemann integral, the fundamental theorem of calculus, improper integrals. Sequences and series of functions, uniform convergence. Fourier series."
+  },
+  {
+    code: "MAT 2141",
+    name: "Honours Linear Algebra",
+    grade: "A+, 100%",
+    description: "Vector spaces, direct sums and complement of subspaces, linear maps, representation of linear maps by matrices, dual spaces, transpose mappings, multilinear mappings, determinants, inner products, orthogonal projections, the Gram-Schmidt algorithm. Eigenvalues and eigenvectors, diagonalization of symmetric matrices. Symmetric forms and Hermitian forms. Spectral Theorem. Isometries. The emphasis of this course is on proving all results."
+  },
+  {
+    code: "MAT 2122",
+    name: "Multivariable Calculus",
+    grade: "A+, 100%",
+    description: "Derivatives as linear maps, the chain rule. The Clairaut-Schwarz theorem. Taylor's theorem. Implicit function theorem and the invertible function theorem. Extrema, critical points. Lagrange multipliers. Double and triple integrals, Fubini's theorem, polar, spherical and cylindrical coordinates. Change of variables. Line integrals, Green's theorem. Parametric surfaces and surface integrals. Curl and Stokes's theorem, existence of potentials. Divergence and Gauss's theorem. Applications."
+  },
+  {
+    code: "CSI 2101",
+    name: "Discrete Structures",
+    grade: "A+, 93%",
+    description: "Propositional logic, proofs. Induction, invariants and state machines. Number theory. Modular arithmetic. Sums and asymptotics. Reccurences. Counting. Directed graphs, undirected graphs and connectivity. Ramsey numbers."
+  },
+  {
+    code: "MAT2371",
+    name: "Introduction to Probability",
+    grade: "A+, 100%",
+    description: "Probability axioms and their consequences. Conditional probability and independence. Random variables, distributions and densities, moments, sampling distributions. Weak law of large numbers, sums of independent random variables, moment generating functions, convergence concepts, the central limit theorem."
+  },
+  {
+    code: "STA2100",
+    name: "Introduction to Statistics",
+    grade: "A, 89%",
+    description: "Introduction to the theory of statistical inference. Parametric point and interval estimation. Maximum likelihood estimation. Properties of estimators. Principles of hypothesis testing. Confidence intervals and tests for means and proportions (one and two sample). Introduction to linear models. Use of statistical software. ANOVA and Chi-square tests. (Formerly MAT2375)"
+  },
+];
+---
+<section class="pt-4">
+  <div class="group relative -mx-3 w-full rounded-xl px-3 py-2 transition-all duration-300 ease-in-out md:hover:bg-hover-light">
+    <button
+      type="button"
+      class="section-toggle flex w-full items-center justify-between text-left py-1"
+      aria-label="Toggle courses"
+    >
+      <h2 class="font-medium tracking-tight text-title pt-2">Relevant Courses (Mathematics)</h2>
+      <svg
+        class="section-chevron h-3 w-3 shrink-0 text-body transition-transform duration-200"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="m19 9-7 7-7-7" />
+      </svg>
+    </button>
+
+    <div class="section-content grid grid-rows-[0fr] transition-all duration-300 ease-in-out">
+      <div class="overflow-hidden">
+        <div class="pt-1.5">
+          {courses.map((course) => (
+            <div class="flex flex-col items-start pt-2">
+              <div class="group relative -mx-3 w-full rounded-lg px-3 pt-3 pb-2 transition-all duration-300 ease-in-out md:hover:bg-hover-dark ml-0">
+                <button
+                  type="button"
+                  class="course-toggle flex w-full cursor-pointer items-center justify-between text-left"
+                  aria-label="Toggle details"
+                >
+                  <div class="flex items-center gap-2 text-sm font-medium tracking-tight text-title">
+                    <span>{course.code}</span>
+                    <span class="font-normal text-body">{course.name}</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-xs font-medium text-accent">{course.grade}</span>
+                    <svg
+                      class="course-chevron h-3 w-3 shrink-0 text-body transition-transform duration-200"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" d="m19 9-7 7-7-7" />
+                    </svg>
+                  </div>
+                </button>
+
+                <div class="course-content grid grid-rows-[0fr] transition-all duration-300 ease-in-out">
+                  <div class="overflow-hidden">
+                    <p class="pt-2 text-sm leading-relaxed text-body">
+                      {course.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initToggles() {
+    // 1. Handle Section Toggles (The main "Relevant Courses" header)
+    const sectionToggles = document.querySelectorAll('.section-toggle');
+    
+    sectionToggles.forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        // Find the parent wrapper for THIS specific section
+        const sectionWrapper = toggle.closest('.group');
+        if (!sectionWrapper) return;
+
+        // Find the specific content and chevron inside THIS section only
+        const content = sectionWrapper.querySelector('.section-content') as HTMLElement;
+        const chevron = sectionWrapper.querySelector('.section-chevron') as HTMLElement;
+        
+        if (!content || !chevron) return;
+
+        const isOpen = content.classList.contains('grid-rows-[1fr]');
+        
+        if (isOpen) {
+          content.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+          chevron.classList.remove('rotate-180');
+          sectionWrapper.classList.remove('bg-hover-light');
+        } else {
+          content.classList.replace('grid-rows-[0fr]', 'grid-rows-[1fr]');
+          chevron.classList.add('rotate-180');
+          sectionWrapper.classList.add('bg-hover-light');
+        }
+      });
+    });
+
+    // 2. Handle Individual Course Toggles
+    const courseToggles = document.querySelectorAll('.course-toggle');
+    
+    courseToggles.forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        const parent = toggle.closest('.group');
+        if (!parent) return;
+
+        const content = parent.querySelector('.course-content') as HTMLElement;
+        const chevron = parent.querySelector('.course-chevron') as HTMLElement;
+        
+        if (!content || !chevron) return;
+
+        const isOpen = content.classList.contains('grid-rows-[1fr]');
+        
+        if (isOpen) {
+          content.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+          chevron.classList.remove('rotate-180');
+          parent.classList.remove('bg-hover-dark', 'pb-1');
+          parent.classList.add('pb-2');
+        } else {
+          content.classList.replace('grid-rows-[0fr]', 'grid-rows-[1fr]');
+          chevron.classList.add('rotate-180');
+          parent.classList.add('bg-hover-dark', 'pb-1');
+          parent.classList.remove('pb-2');
+        }
+      });
+    });
+  }
+
+  // Runs on initial load and after Astro view transitions
+  document.addEventListener('astro:page-load', initToggles);
+</script>

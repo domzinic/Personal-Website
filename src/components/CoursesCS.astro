@@ -1,0 +1,105 @@
+---
+interface CourseCS {
+  code: string;
+  name: string;
+  grade: string;
+  description: string;
+}
+
+const courses: CourseCS[] = [
+  {
+    code: "CSI 2520",
+    name: "Programming Paradigms",
+    grade: "A+, 98%",
+    description: "Presentation of the major programming paradigms: Object-oriented, imperative, procedural, functional and logical programming. Solving the stable-matching problem with the Gale-Shapley algorithm in Java, Go, Prolog and Scheme. Note: course was taken in french."
+  },
+  {
+    code: "CSI 2110",
+    name: "Data Structures & Algorithms",
+    grade: "A+, 97%",
+    description: "The concept of abstract data types. Simple methods of complexity analysis. Trees. The search problem: balanced trees, binary-trees, hashing. Sorting. Graphs and simple graph algorithms: traversal, minimum spanning tree. Strings and pattern matching."
+  },
+  {
+    code: "SEG 2105",
+    name: "Introduction to Software Engineering",
+    grade: "A+, 96%",
+    description: "Principles of software engineering: requirments, design and testing. Review of object orientation. UML Class diagram and state machines. Design Patters, MVC. Testing with Junit. Advanced Java features. Multi-threaded programming, non-determinism."
+  },
+  {
+    code: "CSI 2132",
+    name: "Databases I",
+    grade: "A+, 92%",
+    description: "Fundamental database concepts. Entity-Relationship modeling. Relational algebra and relational calculus. Relational databases. Database definition and manipulation using SQL. Embedded SQL. Functional dependencies and normalization. Introduction to physical database design. Indexing and Hashing. Design and implementation of a database application in a team project (I built the term project by myself)."
+  },
+  {
+    code: "CEG 2136",
+    name: "Computer Architecture I",
+    grade: "A+, NA",
+    description: "Design a digital computer to execute a given instruction set. Design of digital computers. Register transfer and microoperations. Designing the instruction set, CPU and CPU control. Basic machine language programming. Using pipelines for CPU design. Designing the memory unit. Designing Input-Output subsystem."
+  },
+];
+---
+<section class="pt-2">
+  <div class="group relative -mx-3 w-full rounded-xl px-3 py-2 transition-all duration-300 ease-in-out md:hover:bg-hover-light">
+    <button
+      type="button"
+      class="section-toggle flex w-full items-center justify-between text-left py-1"
+      aria-label="Toggle courses"
+    >
+      <h2 class="font-medium tracking-tight text-title pt-2">Relevant Courses (Computer Science)</h2>
+      <svg
+        class="section-chevron h-3 w-3 shrink-0 text-body transition-transform duration-200"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="m19 9-7 7-7-7" />
+      </svg>
+    </button>
+
+    <div class="section-content grid grid-rows-[0fr] transition-all duration-300 ease-in-out">
+      <div class="overflow-hidden">
+        <div class="pt-1.5">
+          {courses.map((course) => (
+            <div class="flex flex-col items-start pt-2">
+              <div class="group relative -mx-3 w-full rounded-lg px-3 pt-3 pb-2 transition-all duration-300 ease-in-out md:hover:bg-hover-dark ml-0">
+                <button
+                  type="button"
+                  class="course-toggle flex w-full cursor-pointer items-center justify-between text-left"
+                  aria-label="Toggle details"
+                >
+                  <div class="flex items-center gap-2 text-sm font-medium tracking-tight text-title">
+                    <span>{course.code}</span>
+                    <span class="font-normal text-body">{course.name}</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-xs font-medium text-accent">{course.grade}</span>
+                    <svg
+                      class="course-chevron h-3 w-3 shrink-0 text-body transition-transform duration-200"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" d="m19 9-7 7-7-7" />
+                    </svg>
+                  </div>
+                </button>
+
+                <div class="course-content grid grid-rows-[0fr] transition-all duration-300 ease-in-out">
+                  <div class="overflow-hidden">
+                    <p class="pt-2 text-sm leading-relaxed text-body">
+                      {course.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
