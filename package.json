@@ -9,8 +9,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "postinstall": "chmod +x node_modules/.bin/astro"
+    "astro": "astro"
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.5",
