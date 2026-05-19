@@ -60,7 +60,7 @@ const courses: Course[] = [
     >
       <h2 class="font-medium tracking-tight text-title pt-2">Relevant Courses (Mathematics)</h2>
       <svg
-        class="section-chevron h-3 w-3 shrink-0 text-body transition-transform duration-200"
+        class="section-arrow h-3 w-3 shrink-0 text-body transition-transform duration-200"
         fill="none"
         stroke="currentColor"
         stroke-width="2"
@@ -88,7 +88,7 @@ const courses: Course[] = [
                   <div class="flex items-center gap-2">
                     <span class="text-xs font-medium text-accent">{course.grade}</span>
                     <svg
-                      class="course-chevron h-3 w-3 shrink-0 text-body transition-transform duration-200"
+                      class="course-arrow h-3 w-3 shrink-0 text-body transition-transform duration-200"
                       fill="none"
                       stroke="currentColor"
                       stroke-width="2"
@@ -117,36 +117,42 @@ const courses: Course[] = [
 
 <script>
   function initToggles() {
-    // 1. Handle Section Toggles (The main "Relevant Courses" header)
+    // find every element with the class "section-toggle"
     const sectionToggles = document.querySelectorAll('.section-toggle');
     
+    // add a click event listener to each section toggle
     sectionToggles.forEach(toggle => {
       toggle.addEventListener('click', () => {
-        // Find the parent wrapper for THIS specific section
+        // find the closest parent with the class "group"
+        // (to only toggle the relevant section)
         const sectionWrapper = toggle.closest('.group');
-        if (!sectionWrapper) return;
+        if (!sectionWrapper) return; //
 
-        // Find the specific content and chevron inside THIS section only
+        // Find the specific content and arrow inside THIS section only
         const content = sectionWrapper.querySelector('.section-content') as HTMLElement;
-        const chevron = sectionWrapper.querySelector('.section-chevron') as HTMLElement;
+        const arrow = sectionWrapper.querySelector('.section-arrow') as HTMLElement;
         
-        if (!content || !chevron) return;
+        if (!content || !arrow) return; // cant find --> stop running code
 
+        // check wether dropdown is open / closed.
         const isOpen = content.classList.contains('grid-rows-[1fr]');
         
+        // expand / retract, rotate the arrow
         if (isOpen) {
+          // retract
           content.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
-          chevron.classList.remove('rotate-180');
+          arrow.classList.remove('rotate-180');
           sectionWrapper.classList.remove('bg-hover-light');
         } else {
+          // expand
           content.classList.replace('grid-rows-[0fr]', 'grid-rows-[1fr]');
-          chevron.classList.add('rotate-180');
+          arrow.classList.add('rotate-180');
           sectionWrapper.classList.add('bg-hover-light');
         }
       });
     });
 
-    // 2. Handle Individual Course Toggles
+    // individual toggles for each course. same idea as the big dropdown.
     const courseToggles = document.querySelectorAll('.course-toggle');
     
     courseToggles.forEach(toggle => {
@@ -154,21 +160,24 @@ const courses: Course[] = [
         const parent = toggle.closest('.group');
         if (!parent) return;
 
+        // get the content and arrow for THIS specific course only
         const content = parent.querySelector('.course-content') as HTMLElement;
-        const chevron = parent.querySelector('.course-chevron') as HTMLElement;
+        const arrow = parent.querySelector('.course-arrow') as HTMLElement;
         
-        if (!content || !chevron) return;
+        if (!content || !arrow) return;
 
         const isOpen = content.classList.contains('grid-rows-[1fr]');
         
         if (isOpen) {
+          //retract
           content.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
-          chevron.classList.remove('rotate-180');
+          arrow.classList.remove('rotate-180');
           parent.classList.remove('bg-hover-dark', 'pb-1');
           parent.classList.add('pb-2');
         } else {
+          //expand
           content.classList.replace('grid-rows-[0fr]', 'grid-rows-[1fr]');
-          chevron.classList.add('rotate-180');
+          arrow.classList.add('rotate-180');
           parent.classList.add('bg-hover-dark', 'pb-1');
           parent.classList.remove('pb-2');
         }
@@ -176,6 +185,6 @@ const courses: Course[] = [
     });
   }
 
-  // Runs on initial load and after Astro view transitions
+  // for astro: make sure script runs on page load.
   document.addEventListener('astro:page-load', initToggles);
 </script>
