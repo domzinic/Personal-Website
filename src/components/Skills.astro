@@ -1,0 +1,57 @@
+---
+interface SkillType {
+    skill: string;
+    description: string;
+}
+interface LangueType {
+    language: string;
+    description: string;
+}
+
+
+const skills = [
+    { skill: "Java" },
+    { skill: "SQL" },
+    { skill: "HTML/CSS" },
+    { skill: "Astro" },
+    { skill: "Tailwind CSS" },
+    { skill: "JavaScript" },
+]
+const langues = [
+    { language: "English", description: "Fluent" },
+    { language: "French", description: "Fluent" },
+]
+
+---
+
+<section class="pt-4">
+    <h2 class = "text-title front-semibold tracking-tight pt-1">Skills</h2>
+    <!-- flex flex-wrap to list on one line -->
+
+    <!-- languages -->
+    <div class="group relative -mx-3 w-full rounded-xl px-3 py-2 transition-all duration-300 ease-in-out md:hover:bg-hover-light">
+    <button
+      type="button"
+      class="section-toggle flex w-full items-center justify-between text-left py-1"
+      aria-label="Toggle courses"
+    >
+      <h2 class="font-medium tracking-tight text-title pt-2">Languages</h2>
+      <svg
+        class="section-arrow h-3 w-3 shrink-0 text-body transition-transform duration-200"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="m19 9-7 7-7-7" />
+      </svg>
+    </button>
+    </div>
+
+
+
+
+
+
+
+</section>
